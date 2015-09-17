@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" ?>
 <package>
   <metadata>
-    <id>IdentityServer3.Localization</id>
+    <id>Local.IdentityServer3.Localization</id>
     <title>Thinktecture IdentityServer3 - Localization</title>
     <version>$version$</version>
     <authors>John Korsnes</authors>
