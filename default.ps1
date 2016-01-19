@@ -11,8 +11,6 @@ properties {
     $dist_dir = "$base_dir\dist";
     $test_report_dir = "$base_dir\TestResult";
     $publishUri = $null;
-    $publishUsername = $null;
-    $publishPassword = $null;
     $publishApiKey = $null
 }
 
@@ -123,22 +121,8 @@ task -name list-publishable-artifacts -action {
     }
 }
 
-task -name ensure-publish-credentials -depends ensure-nuget -action {
-    exec {
-        if (-not((nuget sources list|out-string).Contains('udir-nuggets-publish'))) {
-            Write-host "Adding feed udir-nuggets-publish with value $publishUri"
-            $sourcesCmd = 'add'
-        } else {
-            Write-host "Updating credentials for 'udir-nuggets-publish'"
-            $sourcesCmd = 'update'
-        }
-        nuget sources $sourcesCmd -Name 'udir-nuggets-publish' -source $publishUri `
-            -Username $publishUsername -Password $publishPassword
-    }
-}
-
 task -name publish-to-feed -precondition { return ($publishUri -ne $null)} `
-        -depends ensure-publish-credentials -action {
+        -depends ensure-nuget -action {
     exec {
         find-publishable-artifacts | %{
             Write-host "Publishing $($_.FullName) to $publishUri"
