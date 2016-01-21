@@ -176,7 +176,7 @@ function find_assemblyinfo {
 }
 
 function find-publishable-artifacts {
-    $filter = "*$($build_version).?.nupkg"
+    $filter = "*$($build_version).nupkg"
     Write-host "Searching for publishable artifacts: $filter in $dist_dir"
     gci -Path $dist_dir -Filter $filter
 }
