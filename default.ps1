@@ -116,7 +116,7 @@ task -name run-octopack -depends clean,run-tests -action {
 
 task -name list-publishable-artifacts -action {
     exec {
-        find-publishable-artifacts | %{ Rename-item (join-path $dist_dir $_.Name) "Local.$($_.Name)" }
+        #find-publishable-artifacts | %{ Rename-item (join-path $dist_dir $_.Name) "Local.$($_.Name)" }
         find-publishable-artifacts | %{ Write-host "Artifact: $($_.FullName)"}
     }
 }
@@ -176,7 +176,7 @@ function find_assemblyinfo {
 }
 
 function find-publishable-artifacts {
-    $filter = "*$($build_version).?.nupkg"
+    $filter = "*$($build_version).nupkg"
     Write-host "Searching for publishable artifacts: $filter in $dist_dir"
     gci -Path $dist_dir -Filter $filter
 }
