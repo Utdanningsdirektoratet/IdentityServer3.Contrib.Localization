@@ -116,7 +116,7 @@ task -name run-octopack -depends clean,run-tests -action {
 
 task -name list-publishable-artifacts -action {
     exec {
-        #find-publishable-artifacts | %{ Rename-item (join-path $dist_dir $_.Name) "Local.$($_.Name)" }
+        find-publishable-artifacts | %{ Rename-item (join-path $dist_dir $_.Name) "Local.$($_.Name)" }
         find-publishable-artifacts | %{ Write-host "Artifact: $($_.FullName)"}
     }
 }
