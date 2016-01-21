@@ -146,7 +146,7 @@ function run-msbuild($sln_file, $t, $cfg, $runOctopack=$false) {
     $v = if ($runsOnBuildServer) { 'n'} else { 'q' } 
     Framework '4.5.1'
     msbuild /nologo /verbosity:$v $sln_file /t:$t /p:Configuration=$cfg /p:RunOctoPack=$runOctopack `
-        /p:OctoPackPublishPackageToFileShare=$dist_dir
+        /p:OctoPackPublishPackageToFileShare=$dist_dir /p:OctoPackPackageVersion=$build_version
 }
 
 function xunit_console_runner {
